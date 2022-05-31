@@ -1,11 +1,5 @@
-import express from "express";
-
-const router = require('./routes/index.routes');
-require('./database/db');
-
-const app = express();
-
-app.use(router)
+import app from './app';
+import './database/db';
 
 app.listen(3000);
 console.log("listening on port", 3000);

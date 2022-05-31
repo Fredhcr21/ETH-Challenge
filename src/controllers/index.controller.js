@@ -1,11 +1,10 @@
-const Ether = require('../models/index');
-const {getEther} = require('../../Ether/getBlock');
+import { hash, blockHash, blockNumber } from "../../Ether/getBlock";
 
-export const createEther = async (req, res) => {
-    const {blockHash, hash} = getEther;
+export const TransacHash = async (req, res) => {
+    res.json({
+        hash
+    });
+    const getHash = await hash.find({});
+    return res.status(200).json(getHash);
 
-    const newEther = new Ether({blockHash, hash});
-    const etherSaved = await newEther.save();
-
-    res.json(etherSaved);
 }

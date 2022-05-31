@@ -10,13 +10,39 @@ class transactionHash {
 }
 
 async viewblock() {
-    let block = await this.web3.eth.getBlock('0x42e30b8be869990bd00c9110af337f05860d3e4bbdddd515ec4310cfd3f95b84', ['0x8d3f41a9f33773522ea89f3b8decd56eb34dfea2b987f1811012e19ee7128840'])
-    // let number = block.number
-    // let get = await this.web3.eth.getBlock(number, true)
-    return block;   
-}
-
-}
+    try {
+        let block = await this.web3.eth.getBlock((await this.web3.eth.getBlockNumber()))
+        let number = block.number
+        let get = await this.web3.eth.getBlock(number, true);
+        let transactions = get.transactions;
+        let transaction = transactions[0];
+        let hash = transaction.hash;
+        let blockHash = transaction.blockHash;
+        let blockNumber = transaction.blockNumber;
+        let from = transaction.from;
+        let to = transaction.to;
+        let value = transaction.value;
+        let gas = transaction.gas;
+        let gasPrice = transaction.gasPrice;
+        let input = transaction.input;
+        let nonce = transaction.nonce;
+        let EthTransact = {
+            blockHash,
+            hash,
+            blockNumber,
+            from,
+            to,
+            value,
+            gas,
+            gasPrice,
+            input,
+            nonce
+        }
+        return EthTransact;
+    } catch (error) {
+        console.log(error); 
+    }
+}}
 
 const getEther = setInterval(() => {
     let txCheker = new transactionHash(process.env.INFURA_ID, '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4');
@@ -25,7 +51,9 @@ const getEther = setInterval(() => {
 
 
 module.exports = {
-    getEther
-    
+    getEther,
+    hash: transactionHash,
+    blockHash: transactionHash,
+    blockNumber: transactionHash,
 }
 
