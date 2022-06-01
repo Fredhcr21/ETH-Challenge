@@ -9,51 +9,57 @@ class transactionHash {
     this.account = account;
 }
 
+async viewHash() {
+    let block = await this.web3.eth.getBlock((await this.web3.eth.getBlockNumber()))
+    let number = block.number;
+    let get = await this.web3.eth.getBlock(number, true);
+    let transactions = get.transactions[0];
+    let hash = transactions.hash;
+    let getHash = {
+        hash: hash,
+    }
+    return getHash;
+}
+
+async viewGas() {
+    let block = await this.web3.eth.getBlock((await this.web3.eth.getBlockNumber()))
+    let number = block.number;
+    let get = await this.web3.eth.getBlock(number, true);
+    let transactions = get.transactions[0];
+    let gas = transactions.gas;
+    let getGas = {
+        gas
+    }
+    return getGas;
+}
+
 async viewblock() {
     try {
         let block = await this.web3.eth.getBlock((await this.web3.eth.getBlockNumber()))
         let number = block.number
         let get = await this.web3.eth.getBlock(number, true);
-        let transactions = get.transactions;
-        let transaction = transactions[0];
-        let hash = transaction.hash;
-        let blockHash = transaction.blockHash;
-        let blockNumber = transaction.blockNumber;
-        let from = transaction.from;
-        let to = transaction.to;
-        let value = transaction.value;
-        let gas = transaction.gas;
-        let gasPrice = transaction.gasPrice;
-        let input = transaction.input;
-        let nonce = transaction.nonce;
+        let transactions = get.transactions[0];
         let EthTransact = {
-            blockHash,
-            hash,
-            blockNumber,
-            from,
-            to,
-            value,
-            gas,
-            gasPrice,
-            input,
-            nonce
+            block: transactions
         }
         return EthTransact;
     } catch (error) {
         console.log(error); 
     }
-}}
+}
+}
 
 const getEther = setInterval(() => {
     let txCheker = new transactionHash(process.env.INFURA_ID, '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4');
+    txCheker.viewHash();
+    txCheker.viewGas();
     txCheker.viewblock();
-},15 * 100); 
+}); 
 
 
 module.exports = {
-    getEther,
-    hash: transactionHash,
-    blockHash: transactionHash,
-    blockNumber: transactionHash,
+    viewHash: transactionHash.viewHash,
+    getEther
+
 }
 
