@@ -1,8 +1,6 @@
-import { Router } from "express";
-import {TransacHash} from "../controllers/index.controller";
+import express from "express";
+const router = express.Router();
 
-const router = Router();
 
-router.get('/', TransacHash);
 
 module.exports = router;
