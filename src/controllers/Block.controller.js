@@ -13,8 +13,9 @@ export const getBlock = async (req, res) => {
 
 export const getBlockByNumber = async (req, res) => {
     try {
-        const blockHash = await Block.viewblock(req.params.blockHash);
-        res.json(blockHash);
+        const { blockNumber } = transactionBlock || req.params;
+        const numberBlock = await Block.viewblock(blockNumber);
+        res.json(numberBlock);
     } catch (error) {
         console.log(error);
     }
