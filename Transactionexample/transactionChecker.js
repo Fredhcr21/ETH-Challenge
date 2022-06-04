@@ -9,24 +9,13 @@ class TransactionChecker {
         this.account = account;
     }
 
-    async checkBlock() {
-        let block = await this.web3.eth.getBlock('latest');
-        let number = block.number;
-        console.log('Searching block ' + number);
-
-        if (block != null && block.transactions != null) {
-            for (let txHash of block.transactions) {
-                let tx = await this.web3.eth.getTransaction(txHash);
-                if(this.account == tx.to.toLowerCase()) {
-                    console.log('Transaction found on block: ' + number);
-                    console.log({address: tx.from, value: this.web3.utils.fromWei(tx.value, 'ether'), timestamp: new Date()});
-                }
-            }
-        }
+    async viewBalance() {
+        let balance = await this.web3.eth.getBalance('0x1aD91ee08f21bE3dE0BA2ba6918E714dA6B45836');
+        console.log(balance);
     }
-}
+};
 
 let txCheker = new TransactionChecker(process.env.INFURA_ID, '0x5B38Da6a701c568545dCfcB03FcB875f56beddC4');
 setInterval(() => {
-    txCheker.checkBlock();
+    txCheker.viewBalance();
 }, 600);
