@@ -10,7 +10,7 @@ class TransactionChecker {
     }
 
     async viewBalance() {
-        let balance = await this.web3.eth.getBalance('0x1aD91ee08f21bE3dE0BA2ba6918E714dA6B45836');
+        let balance = await this.web3.eth.getBalance('0x1aD91ee08f21bE3dE0BA2ba6918E714dA6B45836', (await this.web3.eth.defaultBlock));
         console.log(balance);
     }
 };
