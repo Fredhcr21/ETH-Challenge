@@ -1,26 +1,20 @@
 import { Router } from "express";
-
 const Web3 = require('web3');
 
-const web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/' + '20ad5e39822e4cb0ad072bbee7bd25b0'));
+const router = Router();
 
-const BalanceRouter = Router();
+const web3 = new Web3(('https://mainnet.infura.io/v3/20ad5e39822e4cb0ad072bbee7bd25b0'));
 
-BalanceRouter.get('/getbalance/:address', (req, res) => {
-    address = req.params.address
-    try{
-        var balance = web3.eth.getBalance(address).then(function (balance) {
-            ether_bal = Web3.utils.fromWei(balance, 'ether')
-            res.json({  balance: ether_bal })
-        }).catch(function(e) {
-        });
-    }
-    catch{
+router.get('/getBalance/:address', (req, res) => {
+    const address = req.params.address
+    try {
+        const balance = web3.eth.getBalance(address).then(function (balance) {
+            const ether = Web3.utils.fromWei(balance, 'ether')
+            res.json({ balance: ether })
+        })
+    } catch (error) {
         res.status(400).json({ address: address, message:'failed attempt, please try again' })
     }
-        
-    
 })
 
-
-module.exports = BalanceRouter;
+module.exports = router;
