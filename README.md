@@ -1,8 +1,9 @@
 # Eth Challenge.
+- Primero ejecuta `$ npm install` en tu consola para que se pueda actualizar/instalar los paquetes.
 
 - El codigo se ejecuta utilizando el `$ npm run dev`, puedes utilizar cualquier aplicacon de peticiones HTTP puede ser `postman` o cualquier otro.
 
-- En la aplicacion de peticiones utilizas el `http//localhost:3000/eth/`  puedes elegir entre el `block, hash o gas`:
+- En la aplicacion de peticiones utilizas el `http//localhost:3000/eth/`  puedes elegir entre el `block, hash, gas o balance`:
 
 - Block
                     
@@ -13,3 +14,6 @@
 
 - Gas
 >Este te muestra el gas de la ultima transaccion de ethereum 。
+
+- Balance
+>Este te muestra el balance de una address 。
