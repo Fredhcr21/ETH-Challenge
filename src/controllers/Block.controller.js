@@ -11,14 +11,4 @@ export const getBlock = async (req, res) => {
     }
 };
 
-export const getBlockByNumber = async (req, res) => {
-    try {
-        const { blockNumber } = transactionBlock || req.params;
-        const numberBlock = await Block.viewblock(blockNumber);
-        res.json(numberBlock);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 
