@@ -11,12 +11,11 @@ const blockRouter = Router();
 blockRouter.get("/block", getBlock);
 
 blockRouter.get("/block/:number", async (req, res) => {
-    const number = req.params.number;
     try {
-        const numberBlock = await block.eth.getBlock(number)
+        const numberBlock = await block.eth.getBlock(req.params.number);
         res.json(numberBlock)
     } catch (error) {
-        console.log(error)
+        res.status(400).json({ message:'failed attempt, please try again' })
     }
 });
 

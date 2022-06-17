@@ -8,7 +8,7 @@ const web3 = new Web3(('https://mainnet.infura.io/v3/20ad5e39822e4cb0ad072bbee7b
 router.get('/balance/:address', (req, res) => {
     const address = req.params.address
     try {
-        const balance = web3.eth.getBalance(address).then(function (balance) {
+        const balance = web3.eth.getBalance(address).then((balance) => {
             const ether = Web3.utils.fromWei(balance, 'ether')
             res.json({ balance: ether })
         })
